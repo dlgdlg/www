@@ -4,11 +4,34 @@
 	  String nowPage = request.getParameter("nowPage");
 	  String subject = bBean.getSubject();
 	  String content = bBean.getContent(); 
+		request.setCharacterEncoding("euc-kr");
+	  
+	  Cookie[] cookies = request.getCookies();
+	  if(cookies != null) {
+		  for(Cookie tempCookie : cookies) {
+			  if(tempCookie.getName().equals("idKey")) {
+					session.setAttribute("idKey", tempCookie.getValue());
+			  	}
+		  	}
+	  	}
+	 	String id = (String) session.getAttribute("idKey");
 %>
 <html>
 <head>
 <title>JSPBoard</title>
 <link href="style.css" rel="stylesheet" type="text/css">
+<script type="text/javascript">
+function passInputCheck() {
+	if((document.post.pass.value == "") || (document.post.pass.value == null)) {
+		alert("ë¹„ë°€ë²ˆí˜¸ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”.");
+		document.post.pass.focus();
+		return false;
+		
+	} else {
+		postFrm.submit();
+	}
+}
+</script>
 </head>
 <body bgcolor="white">
 <div align="center">
@@ -24,26 +47,30 @@
   <td align="center">
    <table border="0">
     <tr>
-     <td width="20%">¼º ¸í</td>
+     <td width="20%">ì„± ëª…</td>
      <td width="80%">
-	  <input type="text" name="name" size="51" maxlength="20"></td>
+		<% if(id !=null) { %>
+					<input type="text" name="name" size="51" maxlength="15" value=<%=id%> readonly></td>
+				<% } else { %>
+					<input type="text" name="name" size="51" maxlength="15"></td>
+				<% } %>
     </tr>
     <tr>
-     <td width="20%">Á¦ ¸ñ</td>
+     <td width="20%">ì œ ëª©</td>
      <td width="80%">
-	  <input type="text" name="subject" size="51" value="´äº¯ : <%=subject%>" maxlength="50"></td> 
+	  <input type="text" name="subject" size="51" value="ë‹µë³€ : <%=subject%>" maxlength="50"></td> 
     </tr>
 	<tr>
-     <td width="20%">³» ¿ë</td>
+     <td width="20%">ë‚´ ìš©</td>
      <td width="80%">
 	  <textarea name="content" rows="12" cols="50">
       	<%=content %>
-      	========´äº¯ ±ÛÀ» ¾²¼¼¿ä.=======
+      	========ë‹µë³€ ê¸€ì„ ì“°ì„¸ìš”.=======
       	</textarea>
       </td>
     </tr>
     <tr>
-     <td width="20%">ºñ¹Ğ ¹øÈ£</td> 
+     <td width="20%">ë¹„ë°€ ë²ˆí˜¸</td> 
      <td width="80%">
 	  <input type="password" name="pass" size="15" maxlength="15"></td> 
     </tr>
@@ -52,9 +79,9 @@
     </tr>
 	<tr> 
      <td colspan="2">
-	  <input type="submit" value="´äº¯µî·Ï" >
-      <input type="reset" value="´Ù½Ã¾²±â">
-      <input type="button" value="µÚ·Î" onClick="history.back()"></td>
+	  <input type="submit" value="ë‹µë³€ë“±ë¡"  onClick="return passInputCheck()">
+      <input type="reset" value="ë‹¤ì‹œì“°ê¸°">
+      <input type="button" value="ë’¤ë¡œ" onClick="history.back()"></td>
     </tr> 
    </table>
   </td>
