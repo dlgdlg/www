@@ -20,7 +20,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 public class BoardMgr {
 
 	private DBConnectionMgr pool;
-	private static final String  SAVEFOLDER = "C:/jsp/swuapp/homepage/WebContent/www/fileupload";
+	private static final String  SAVEFOLDER = "/web/file";
 	private static final String ENCTYPE = "euc-kr";
 	private static int MAXSIZE = 5*1024*1024;
 
@@ -32,7 +32,7 @@ public class BoardMgr {
 		}
 	}
 
-	// °Ô½ÃÆÇ ¸®½ºÆ®
+	// ê²Œì‹œíŒ ë¦¬ìŠ¤íŠ¸
 	public Vector<BoardBean> getBoardList(String keyField, String keyWord,
 			int start, int end) {
 		Connection con = null;
@@ -76,7 +76,7 @@ public class BoardMgr {
 		return vlist;
 	}
 	
-	//ÃÑ °Ô½Ã¹°¼ö
+	//ì´ ê²Œì‹œë¬¼ìˆ˜
 	public int getTotalCount(String keyField, String keyWord) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -105,7 +105,7 @@ public class BoardMgr {
 		return totalCount;
 	}
 	
-	// °Ô½Ã¹° ÀÔ·Â
+	// ê²Œì‹œë¬¼ ì…ë ¥
 	public void insertBoard(HttpServletRequest req) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -155,7 +155,7 @@ public class BoardMgr {
 		}
 	}
 	
-	// °Ô½Ã¹° ¸®ÅÏ
+	// ê²Œì‹œë¬¼ ë¦¬í„´
 	public BoardBean getBoard(int num) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -191,7 +191,7 @@ public class BoardMgr {
 		return bean;
 	}
 
-	// Á¶È¸¼ö Áõ°¡
+	// ì¡°íšŒìˆ˜ ì¦ê°€
 	public void upCount(int num) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -209,7 +209,7 @@ public class BoardMgr {
 		}
 	}
 
-	// °Ô½Ã¹° »èÁ¦
+	// ê²Œì‹œë¬¼ ì‚­ì œ
 	public void deleteBoard(int num) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -240,7 +240,7 @@ public class BoardMgr {
 		}
 	}
 
-	// °Ô½Ã¹° ¼öÁ¤
+	// ê²Œì‹œë¬¼ ìˆ˜ì •
 	public void updateBoard(BoardBean bean) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -261,7 +261,7 @@ public class BoardMgr {
 		}
 	}
 
-	// °Ô½Ã¹° ´äº¯
+	// ê²Œì‹œë¬¼ ë‹µë³€
 	public void replyBoard(BoardBean bean) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -290,7 +290,7 @@ public class BoardMgr {
 		}
 	}
 
-	// ´äº¯¿¡ À§Ä¡°ª Áõ°¡
+	// ë‹µë³€ì— ìœ„ì¹˜ê°’ ì¦ê°€
 	public void replyUpBoard(int ref, int pos) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -310,21 +310,21 @@ public class BoardMgr {
 		}
 	}
 
-	//ÆÄÀÏ ´Ù¿î·Îµå
+	//íŒŒì¼ ë‹¤ìš´ë¡œë“œ
 		public void downLoad(HttpServletRequest req, HttpServletResponse res,
 				JspWriter out,PageContext pageContext) {
 			try {
-				//¿äÃ»°´Ã¼ÀÎ req¿¡¼­ ´Ù¿î·Îµå ÆÄÀÏ¸íÀ» ¹®ÀÚ¿­·Î ¸®ÅÏ ¹Ş´Â´Ù.
+				//ìš”ì²­ê°ì²´ì¸ reqì—ì„œ ë‹¤ìš´ë¡œë“œ íŒŒì¼ëª…ì„ ë¬¸ìì—´ë¡œ ë¦¬í„´ ë°›ëŠ”ë‹¤.
 				String filename = req.getParameter("filename");
-				//ÀúÀåµÈ °æ·Î¿Í ´Ù¿î·Îµå ÆÄÀÏ¸íÀ» ÇÕÃÄ¼­ File °´Ã¼¸¦ »ı¼ºÇÑ´Ù. 
+				//ì €ì¥ëœ ê²½ë¡œì™€ ë‹¤ìš´ë¡œë“œ íŒŒì¼ëª…ì„ í•©ì³ì„œ File ê°ì²´ë¥¼ ìƒì„±í•œë‹¤. 
 				File file = new File(UtilMgr.con(SAVEFOLDER + File.separator+ filename));
-				//ÆÄÀÏÀÇ ¿ë·® Å©±â ¸¸Å­ byte ¹è¿­À» ¼±¾ğÇÑ´Ù. 
+				//íŒŒì¼ì˜ ìš©ëŸ‰ í¬ê¸° ë§Œí¼ byte ë°°ì—´ì„ ì„ ì–¸í•œë‹¤. 
 				byte b[] = new byte[(int) file.length()];
-				//ÀÀ´ä °´Ã¼ res Çì´õÇÊµå¿¡ Accept-Ranges¿¡ bytes ´ÜÀ§·Î ¼³Á¤ÇÑ´Ù.
+				//ì‘ë‹µ ê°ì²´ res í—¤ë”í•„ë“œì— Accept-Rangesì— bytes ë‹¨ìœ„ë¡œ ì„¤ì •í•œë‹¤.
 				res.setHeader("Accept-Ranges", "bytes");
-				//¿äÃ»°´Ã¼ÀÎ req¿¡¼­ Å¬¶óÀÌ¾ğÆ®ÀÇ User-Agent Á¤º¸¸¦ ¸®ÅÏ ¹Ş´Â´Ù.
+				//ìš”ì²­ê°ì²´ì¸ reqì—ì„œ í´ë¼ì´ì–¸íŠ¸ì˜ User-Agent ì •ë³´ë¥¼ ë¦¬í„´ ë°›ëŠ”ë‹¤.
 				String strClient = req.getHeader("User-Agent");
-				//ºê¶ó¿ìÀúÀÇ ¹öÀü°ú Á¤º¸¸¦ ±¸ºĞÇØ¼­ °¢°¢ res Çì´õÇÊµå¿Í contentTypeÀ» ¼³Á¤ÇÑ´Ù.
+				//ë¸Œë¼ìš°ì €ì˜ ë²„ì „ê³¼ ì •ë³´ë¥¼ êµ¬ë¶„í•´ì„œ ê°ê° res í—¤ë”í•„ë“œì™€ contentTypeì„ ì„¤ì •í•œë‹¤.
 				if (strClient.indexOf("MSIE6.0") != -1) {
 					res.setContentType("application/smnet;charset=euc-kr");
 					res.setHeader("Content-Disposition", "filename=" + filename + ";");
@@ -334,7 +334,7 @@ public class BoardMgr {
 				}
 				out.clear();
 				out=pageContext.pushBody();
-				//ÆÄÀÏ Á¸Àç ¿©ºÎ¿¡ µû¶ó ½ºÆ®¸µ ¹æ½ÄÀ¸·Î ºê¶ó¿ìÀú·Î ÆÄÀÏÀ» Àü¼ÛÇÑ´Ù.
+				//íŒŒì¼ ì¡´ì¬ ì—¬ë¶€ì— ë”°ë¼ ìŠ¤íŠ¸ë§ ë°©ì‹ìœ¼ë¡œ ë¸Œë¼ìš°ì €ë¡œ íŒŒì¼ì„ ì „ì†¡í•œë‹¤.
 				if (file.isFile()) {
 					BufferedInputStream fin = new BufferedInputStream(
 							new FileInputStream(file));
@@ -352,7 +352,7 @@ public class BoardMgr {
 			}
 		}
 	
-	//ÆäÀÌÂ¡ ¹× ºí·° Å×½ºÆ®¸¦ À§ÇÑ °Ô½Ã¹° ÀúÀå ¸Ş¼Òµå 
+	//í˜ì´ì§• ë° ë¸”ëŸ­ í…ŒìŠ¤íŠ¸ë¥¼ ìœ„í•œ ê²Œì‹œë¬¼ ì €ì¥ ë©”ì†Œë“œ 
 	public void post1000(){
 		Connection con = null;
 		PreparedStatement pstmt = null;
