@@ -6,8 +6,8 @@
 	  String id = request.getParameter("id");
 	  String pass = request.getParameter("pass");
 	  String url = cPath+"/www/right.jsp";
-	  String msg = "·Î±×ÀÎ¿¡ ½ÇÆÐ ÇÏ¿´½À´Ï´Ù.";
-	  System.out.println("LoginProc.jsp´Â ½ÇÇà¿Ï·á!");
+	  String msg = "ë¡œê·¸ì¸ì— ì‹¤íŒ¨ í•˜ì˜€ìŠµë‹ˆë‹¤.";
+	  System.out.println("LoginProc.jspëŠ” ì‹¤í–‰ì™„ë£Œ!");
 	  boolean result = mMgr1.loginMember(id,pass);
 	  System.out.println(result);
 	  if(result){
@@ -15,9 +15,9 @@
 			Cookie cookie = new Cookie("idKey", id);
 			cookie.setMaxAge(60);
 			cookie.setPath("/");
-			cookie.setDomain("cloud.company.com");
+			cookie.setDomain(".company.com");
 			response.addCookie(cookie);
-	    msg = "·Î±×ÀÎ¿¡ ¼º°ø ÇÏ¿´½À´Ï´Ù.";
+	    msg = "ë¡œê·¸ì¸ì— ì„±ê³µ í•˜ì˜€ìŠµë‹ˆë‹¤.";
 	  }
 %>
 <script>
