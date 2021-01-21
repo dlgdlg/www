@@ -20,7 +20,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 public class BoardMgr {
 
 	private DBConnectionMgr pool;
-	private static final String  SAVEFOLDER = "/root/eclipse-workspace/www/fileupload";
+	private static final String  SAVEFOLDER = "/web/file";
 	private static final String ENCTYPE = "euc-kr";
 	private static int MAXSIZE = 5*1024*1024;
 
