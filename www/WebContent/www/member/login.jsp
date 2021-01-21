@@ -35,37 +35,30 @@
 </head>
 <body bgcolor="#FFFFCC">
 <br/><br/>
-<div align="center">
-	<table>
-		<tr>
-			<td>
-				<%
-					if (id != null) { //로그인을 성공
-				%>
-				<b><%=id%></b>님
-			</td>
-			<td> / </td>
-			<td><a href="member/logout.jsp">OUT</a> <!-- <-if문이 참일 때 --></td>
-		</tr>
-		<tr>
-		</tr>
-		<tr>
-			<td>
-				<a href="#" onClick="window.open('http://mail.company.com/','_blank','width=800,height=800')">MAIL</a>
-			</td>
-			<td>/</td>
-			<td>
-				<a href="#" onClick="window.open('http://cloud.company.com/','_blank','width=800,height=800')"> CLOUD</a>
-			</td>
-			<td>/<td>
-			<td>
-				<a href="#" onClick="window.open('http://ncloud.company.com/','_blank','width=800,height=800')">NCLOUD</a>
-			</td>
-		</tr>
-	</table>
-	<%} else {%>
-	<form name="loginFrm" method="post" action="member/loginProc.jsp">
+ <div align="center">
+		<%
+			if (id != null) { //로그인을 성공
+		%>
 		<table>
+			<tr>
+				<td><b><%=id%></b> 님</td>
+				<td><a href="member/logout.jsp">로그아웃</a></td>
+			</tr>
+		</table>
+		<p>--------------------------------------
+		<p>
+			<table>
+				<tr>
+					<td><a href="#" onClick="window.open('http://mail.company.com/','_blank','width=800,height=800')">MAIL</a></td>
+					<td> / </td>
+					<td><a href="#" onClick="window.open('http://cloud.company.com/','_blank','width=800,height=800')">CLOUD</a></td>
+					<td> / <td>
+					<td><a href="#" onClick="window.open('http://ncloud.company.com/','_blank','width=800,height=800')">NCLOUD</a></td>
+				</tr>
+			</table>
+			<%} else {%>
+		<form name="loginFrm" method="post" action="member/loginProc.jsp">
+			<table>
 				<tr>
 					<td align="left" colspan="2"><h4>LOGIN</h4></td>
 				</tr>
