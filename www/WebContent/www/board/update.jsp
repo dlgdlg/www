@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=utf-8"%>
 <%@ page import="www.BoardBean"%>
 <% 
-		request.setCharacterEncoding("euc-kr");
+		request.setCharacterEncoding("utf-8");
 	  int num = Integer.parseInt(request.getParameter("num"));
 	  String nowPage = request.getParameter("nowPage");
 	  BoardBean bBean = (BoardBean)session.getAttribute("bBean");
