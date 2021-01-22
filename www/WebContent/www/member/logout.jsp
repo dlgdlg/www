@@ -17,6 +17,5 @@
 %>
 <script>
    alert('로그아웃 되었습니다.');
-   top.document.location.reload(); 
    location.href="<%=request.getContextPath()%>/www/right.jsp"; <!-- 처음 창 다시 나타남 -->
 </script>
