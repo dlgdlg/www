@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=utf-8"%>
-<%request.setCharacterEncoding("EUC-KR");%>
+<%request.setCharacterEncoding("UTF-8");%>
 <jsp:useBean id="bMgr" class="www.BoardMgr" />
 <jsp:useBean id="bBean" class="www.BoardBean" scope="session"/>
 <jsp:useBean id="upBean" class="www.BoardBean"/>
