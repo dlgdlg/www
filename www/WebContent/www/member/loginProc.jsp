@@ -22,6 +22,5 @@
 	<% if(!result) { %>
 		alert("<%=msg%>");
 	<% } %>
-	top.document.location.reload(); 
 	location.href="<%=url%>";
 </script>
