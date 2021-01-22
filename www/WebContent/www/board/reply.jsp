@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=EUC-KR"%>
+<%@ page contentType="text/html; charset=utf-8"%>
 <jsp:useBean id="bBean" class="www.BoardBean" scope="session"/>
 <%
 	  String nowPage = request.getParameter("nowPage");

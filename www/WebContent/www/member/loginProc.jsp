@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=EUC-KR"%>
+<%@ page contentType="text/html; charset=utf-8"%>
 <jsp:useBean id="mMgr1" class="www.MemberMgr1"/>
 <%
 	  request.setCharacterEncoding("euc-kr");
@@ -7,7 +7,6 @@
 	  String pass = request.getParameter("pass");
 	  String url = cPath+"/www/right.jsp";
 	  String msg = "로그인에 실패 하였습니다.";
-	  System.out.println("LoginProc.jsp는 실행완료!");
 	  boolean result = mMgr1.loginMember(id,pass);
 	  System.out.println(result);
 	  if(result){
@@ -17,11 +16,12 @@
 			cookie.setPath("/");
 			cookie.setDomain(".company.com");
 			response.addCookie(cookie);
-	    msg = "로그인에 성공 하였습니다.";
 	  }
 %>
 <script>
-	alert("<%=msg%>");
+	<% if(!result) { %>
+		alert("<%=msg%>");
+	<% } %>
 	top.document.location.reload(); 
 	location.href="<%=url%>";
 </script>

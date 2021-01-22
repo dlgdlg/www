@@ -1,25 +1,35 @@
-<%@ page contentType="text/html; charset=EUC-KR"%>
+<%@ page contentType="text/html; charset=utf-8"%>
 <%@page import="www.BoardBean, java.util.*" %>
 
 <%
-	request.setCharacterEncoding("EUC-KR");
+	request.setCharacterEncoding("UTF-8");
+
+	Cookie[] cookies = request.getCookies();
+	if(cookies != null) {
+  	for(Cookie tempCookie : cookies) {
+	  	if(tempCookie.getName().equals("idKey")) {
+				session.setAttribute("idKey", tempCookie.getValue());
+	  		}
+  		}
+	}
+	String id = (String) session.getAttribute("idKey");
 %>
 <jsp:useBean id="bMgr" class="www.BoardMgr" />
 <%	
-	  int totalRecord=0; //ÀüÃ¼·¹ÄÚµå¼ö
-	  int numPerPage=10; // ÆäÀÌÁö´ç ·¹ÄÚµå ¼ö 
-	  int pagePerBlock=15;  //ºí·°´ç ÆäÀÌÁö¼ö 
+	  int totalRecord=0; //ì „ì²´ë ˆì½”ë“œìˆ˜
+	  int numPerPage=10; // í˜ì´ì§€ë‹¹ ë ˆì½”ë“œ ìˆ˜ 
+	  int pagePerBlock=15;  //ë¸”ëŸ­ë‹¹ í˜ì´ì§€ìˆ˜ 
 	  
-	  int totalPage=0; //ÀüÃ¼ ÆäÀÌÁö ¼ö
-	  int totalBlock=0;  //ÀüÃ¼ ºí·°¼ö 
+	  int totalPage=0; //ì „ì²´ í˜ì´ì§€ ìˆ˜
+	  int totalBlock=0;  //ì „ì²´ ë¸”ëŸ­ìˆ˜ 
 
-	  int nowPage=1; // ÇöÀçÆäÀÌÁö
-	  int nowBlock=1;  //ÇöÀçºí·°
+	  int nowPage=1; // í˜„ì¬í˜ì´ì§€
+	  int nowBlock=1;  //í˜„ì¬ë¸”ëŸ­
 	  
-	  int start=0; //µğºñÀÇ select ½ÃÀÛ¹øÈ£
-	  int end=10; //½ÃÀÛ¹øÈ£·Î ºÎÅÍ °¡Á®¿Ã select °¹¼ö
+	  int start=0; //ë””ë¹„ì˜ select ì‹œì‘ë²ˆí˜¸
+	  int end=10; //ì‹œì‘ë²ˆí˜¸ë¡œ ë¶€í„° ê°€ì ¸ì˜¬ select ê°¯ìˆ˜
 	  
-	  int listSize=0; //ÇöÀç ÀĞ¾î¿Â °Ô½Ã¹°ÀÇ ¼ö
+	  int listSize=0; //í˜„ì¬ ì½ì–´ì˜¨ ê²Œì‹œë¬¼ì˜ ìˆ˜
 
 	String keyWord = "", keyField = "";
 	Vector<BoardBean> vlist = null;
@@ -41,10 +51,10 @@
 	 end= start+numPerPage;
 	 
 	totalRecord = bMgr.getTotalCount(keyField, keyWord);
-	totalPage =(int)Math.ceil((double)totalRecord / numPerPage);  //ÀüÃ¼ÆäÀÌÁö¼ö
-	nowBlock= (int)Math.ceil((double)nowPage/pagePerBlock); //ÇöÀçºí·° °è»ê
+	totalPage =(int)Math.ceil((double)totalRecord / numPerPage);  //ì „ì²´í˜ì´ì§€ìˆ˜
+	nowBlock= (int)Math.ceil((double)nowPage/pagePerBlock); //í˜„ì¬ë¸”ëŸ­ ê³„ì‚°
 	  
-	totalBlock =(int)Math.ceil((double)totalPage / pagePerBlock);  //ÀüÃ¼ºí·°°è»ê
+	totalBlock =(int)Math.ceil((double)totalPage / pagePerBlock);  //ì „ì²´ë¸”ëŸ­ê³„ì‚°
 %>
 <html>
 <head>
@@ -74,18 +84,25 @@
 	
 	function check() {
 	     if (document.searchFrm.keyWord.value == "") {
-	   alert("°Ë»ö¾î¸¦ ÀÔ·ÂÇÏ¼¼¿ä.");
+	   alert("ê²€ìƒ‰ì–´ë¥¼ ì…ë ¥í•˜ì„¸ìš”.");
 	   document.searchFrm.keyWord.focus();
 	   return;
 	     }
 	  document.searchFrm.submit();
 	 }
+	
+	function checkLogin() {
+		if(<%=id%> == null){
+			alert("ë¡œê·¸ì¸ì„ í•˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.");
+			return false;
+		}
+	}
 </script>
 </head>
 <body bgcolor="white">
 <div align="left">
 	<br/>
-	<h2 style="margin-left: 100px;">°í°´¼¾ÅÍ</h2>
+	<h2 style="margin-left: 100px;">ê³ ê°ì„¼í„°</h2>
 	<br>
 	<table align="center" border="0" width="80%">
 			<tr>
@@ -98,18 +115,18 @@
 			<td align="center" colspan="2">
 			<%
 				  vlist = bMgr.getBoardList(keyField, keyWord, start, end);
-				  listSize = vlist.size();//ºê¶ó¿ìÀú È­¸é¿¡ º¸¿©Áú °Ô½Ã¹°°¹¼ö
+				  listSize = vlist.size();//ë¸Œë¼ìš°ì € í™”ë©´ì— ë³´ì—¬ì§ˆ ê²Œì‹œë¬¼ê°¯ìˆ˜
 				  if (vlist.isEmpty()) {
-					out.println("µî·ÏµÈ °Ô½Ã¹°ÀÌ ¾ø½À´Ï´Ù.");
+					out.println("ë“±ë¡ëœ ê²Œì‹œë¬¼ì´ ì—†ìŠµë‹ˆë‹¤.");
 				  } else {
 			%>
 				  <table border="0" width="100%" cellpadding="2" cellspacing="0">
 					<tr align="center" bgcolor="#D0D0D0" height="120%">
-						<td>¹ø È£</td>
-						<td>Á¦ ¸ñ</td>
-						<td>ÀÌ ¸§</td>
-						<td>³¯ Â¥</td>
-						<td>Á¶È¸¼ö</td>
+						<td>ë²ˆ í˜¸</td>
+						<td>ì œ ëª©</td>
+						<td>ì´ ë¦„</td>
+						<td>ë‚  ì§œ</td>
+						<td>ì¡°íšŒìˆ˜</td>
 					</tr>
 					<%
 						  for (int i = 0;i<numPerPage; i++) {
@@ -151,11 +168,11 @@
 		</tr>
 		<tr>
 			<td>
-			<!-- ÆäÀÌÂ¡ ¹× ºí·° Ã³¸® Start--> 
+			<!-- í˜ì´ì§• ë° ë¸”ëŸ­ ì²˜ë¦¬ Start--> 
 			<%
-   				  int pageStart = (nowBlock -1)*pagePerBlock + 1 ; //ÇÏ´Ü ÆäÀÌÁö ½ÃÀÛ¹øÈ£
+   				  int pageStart = (nowBlock -1)*pagePerBlock + 1 ; //í•˜ë‹¨ í˜ì´ì§€ ì‹œì‘ë²ˆí˜¸
    				  int pageEnd = ((pageStart + pagePerBlock ) < totalPage) ?  (pageStart + pagePerBlock): totalPage+1; 
-   				  //ÇÏ´Ü ÆäÀÌÁö ³¡¹øÈ£
+   				  //í•˜ë‹¨ í˜ì´ì§€ ëë²ˆí˜¸
    				  if(totalPage !=0){
     			  	if (nowBlock > 1) {%>
     			  		<a href="javascript:block('<%=nowBlock-1%>')">prev...</a><%}%>&nbsp; 
@@ -169,11 +186,11 @@
     					<a href="javascript:block('<%=nowBlock+1%>')">.....next</a>
     				<%}%>&nbsp;  
    				<%}%>
- 				<!-- ÆäÀÌÂ¡ ¹× ºí·° Ã³¸® End-->
+ 				<!-- í˜ì´ì§• ë° ë¸”ëŸ­ ì²˜ë¦¬ End-->
 				</td>
 				<td align="right">
-					<a href="post.jsp">[±Û¾²±â]</a> 
-					<a href="javascript:list()">[Ã³À½À¸·Î]</a>
+					<a href="post.jsp" onclick="return checkLogin()">[ê¸€ì“°ê¸°]</a> 
+					<a href="javascript:list()">[ì²˜ìŒìœ¼ë¡œ]</a>
 				</td>
 			</tr>
 		</table>
@@ -183,12 +200,12 @@
  		<tr>
   			<td align="center" valign="bottom">
    				<select name="keyField" size="1" >
-    				<option value="name"> ÀÌ ¸§</option>
-    				<option value="subject"> Á¦ ¸ñ</option>
-    				<option value="content"> ³» ¿ë</option>
+    				<option value="name"> ì´ ë¦„</option>
+    				<option value="subject"> ì œ ëª©</option>
+    				<option value="content"> ë‚´ ìš©</option>
    				</select>
    				<input type="text" size="16" name="keyWord">
-   				<input type="button"  value="Ã£±â" onClick="javascript:check()">
+   				<input type="button"  value="ì°¾ê¸°" onClick="javascript:check()">
    				<input type="hidden" name="nowPage" value="1">
   			</td>
  		</tr>

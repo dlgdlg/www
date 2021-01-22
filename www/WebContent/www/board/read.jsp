@@ -1,7 +1,16 @@
-<%@ page contentType="text/html; charset=EUC-KR"%>
+<%@ page contentType="text/html; charset=utf-8"%>
 <%@page import="www.BoardBean"%>
 <%
 	request.setCharacterEncoding("EUC-KR");
+	Cookie[] cookies = request.getCookies();
+	if(cookies != null) {
+	  for(Cookie tempCookie : cookies) {
+		  if(tempCookie.getName().equals("idKey")) {
+				session.setAttribute("idKey", tempCookie.getValue());
+		  	}
+	  	}
+	}
+	String id = (String) session.getAttribute("idKey");
 %>
 <jsp:useBean id="bMgr" class="www.BoardMgr" />
 <%
@@ -9,8 +18,8 @@
 	  String nowPage = request.getParameter("nowPage");
 	  String keyField = request.getParameter("keyField");
 	  String keyWord = request.getParameter("keyWord");
-	  bMgr.upCount(num);//Á¶È¸¼ö Áõ°¡
-	  BoardBean bBean = bMgr.getBoard(num);//°Ô½Ã¹° °¡Á®¿À±â
+	  bMgr.upCount(num);//ì¡°íšŒìˆ˜ ì¦ê°€
+	  BoardBean bBean = bMgr.getBoard(num);//ê²Œì‹œë¬¼ ê°€ì ¸ì˜¤ê¸°
 	  String name = bBean.getName();
 	  String subject = bBean.getSubject();
       String regdate = bBean.getRegdate();
@@ -19,7 +28,7 @@
 	  int filesize = bBean.getFilesize();
 	  String ip = bBean.getIp();
 	  int count = bBean.getCount();
-	  session.setAttribute("bBean", bBean);//°Ô½Ã¹°À» ¼¼¼Ç¿¡ ÀúÀå
+	  session.setAttribute("bBean", bBean);//ê²Œì‹œë¬¼ì„ ì„¸ì…˜ì— ì €ì¥
 %>
 <html>
 <head>
@@ -35,6 +44,18 @@
 		 document.downFrm.filename.value=filename;
 		 document.downFrm.submit();
 	}
+	function checkId() {
+		if("<%=name%>" != "<%=id%>") {
+			alert("ì•„ì´ë””ê°€ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
+			return false;
+		}
+	}
+	function checkLogin() {
+		if(<%=id%> == null){
+			alert("ë¡œê·¸ì¸ì„ í•˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.");
+			return false;
+		}
+	}
 </script>
 </head>
 <body bgcolor="white">
@@ -44,22 +65,22 @@
   <td colspan="2">
    <table border="1px" cellpadding="3" cellspacing="0" width=100%> 
     <tr> 
-  <td align="center" bgcolor="#EEEEEE" width="10%"> ÀÌ ¸§ </td>
+  <td align="center" bgcolor="#EEEEEE" width="10%"> ì´ ë¦„ </td>
   <td bgcolor="white"><%=name%></td>
-  <td align="center" bgcolor="#EEEEEE" width=10%> µî·Ï³¯Â¥ </td>
+  <td align="center" bgcolor="#EEEEEE" width=10%> ë“±ë¡ë‚ ì§œ </td>
   <td bgcolor="white"><%=regdate%></td>
  </tr>
  <tr> 
-    <td align="center" bgcolor="#EEEEEE"> Á¦ ¸ñ</td>
+    <td align="center" bgcolor="#EEEEEE"> ì œ ëª©</td>
     <td bgcolor="white" colspan="3"><%=subject%></td>
    </tr>
    <tr> 
-     <td align="center" bgcolor="#EEEEEE">Ã·ºÎÆÄÀÏ</td>
+     <td align="center" bgcolor="#EEEEEE">ì²¨ë¶€íŒŒì¼</td>
      <td bgcolor="white" colspan="3">
      <% if( filename !=null && !filename.equals("")) {%>
   		<a href="javascript:down('<%=filename%>')"><%=filename%></a>
   		 &nbsp;&nbsp;<font color="blue">(<%=filesize%>KBytes)</font>  
-  		 <%} else{%> µî·ÏµÈ ÆÄÀÏÀÌ ¾ø½À´Ï´Ù.<%}%>
+  		 <%} else{%> ë“±ë¡ëœ íŒŒì¼ì´ ì—†ìŠµë‹ˆë‹¤.<%}%>
      </td>
    </tr>
    <tr> 
@@ -67,7 +88,7 @@
    </tr>
    <tr>
     <td colspan="4" align="right">
-     <%=ip%>·Î ºÎÅÍ ±ÛÀ» ³²±â¼Ì½À´Ï´Ù./  Á¶È¸¼ö  <%=count%>
+     <%=ip%>ë¡œ ë¶€í„° ê¸€ì„ ë‚¨ê¸°ì…¨ìŠµë‹ˆë‹¤./  ì¡°íšŒìˆ˜  <%=count%>
     </td>
    </tr>
    </table>
@@ -76,10 +97,10 @@
  <tr>
   <td align="center" colspan="2"> 
  <hr size="1">
- [ <a href="javascript:list()" >¸®½ºÆ®</a> | 
- <a href="update.jsp?nowPage=<%=nowPage%>&num=<%=num%>" >¼ö Á¤</a> |
- <a href="reply.jsp?nowPage=<%=nowPage%>" >´ä º¯</a> |
- <a href="delete.jsp?nowPage=<%=nowPage%>&num=<%=num%>">»è Á¦</a> ]<br>
+ [ <a href="javascript:list()" >ë¦¬ìŠ¤íŠ¸</a> | 
+ <a href="update.jsp?nowPage=<%=nowPage%>&num=<%=num%>" onclick="return checkId()">ìˆ˜ ì •</a> |
+ <a href="reply.jsp?nowPage=<%=nowPage%>" onclick="return checkLogin()">ë‹µ ë³€</a> |
+ <a href="delete.jsp?nowPage=<%=nowPage%>&num=<%=num%>" onclick="return checkId()">ì‚­ ì œ</a> ]<br>
   </td>
  </tr>
 </table>

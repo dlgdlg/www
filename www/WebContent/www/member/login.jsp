@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=EUC-KR"%>
+<%@ page contentType="text/html; charset=utf-8"%>
 <%
 	  request.setCharacterEncoding("euc-kr");
 	  
@@ -14,17 +14,17 @@
 %>
 <html>
 <head>
-<title>로그인</title>
+<title>Login</title>
 <link href="style.css" rel="stylesheet" type="text/css">
 <script type="text/javascript">
 	function loginCheck() {
 		if (document.loginFrm.id.value == "") {
-			alert("아이디를 입력해 주세요.");
+			alert("아이디를 입력하시오.");
 			document.loginFrm.id.focus();
 			return;
 		}
 		if (document.loginFrm.pass.value == "") {
-			alert("비밀번호를 입력해 주세요.");
+			alert("비밀번호를 입력하시오.");
 			document.loginFrm.pass.focus();
 			return;
 		}
@@ -32,17 +32,22 @@
 		document.loginFrm.submit();
 	}
 </script>
+<style>
+	.login {
+		width:100px;
+	}
+</style>
 </head>
 <body bgcolor="#FFFFCC">
 <br/><br/>
- <div align="center">
+ <div class="login" align="center" style="width: 100%;">
 		<%
-			if (id != null) { //로그인을 성공
+			if (id != null) { 
 		%>
 		<table>
 			<tr>
 				<td><b><%=id%></b> 님</td>
-				<td><a href="member/logout.jsp">로그아웃</a></td>
+				<td><a href="member/logout.jsp">LOGOUT</a></td>
 			</tr>
 		</table>
 		<p>--------------------------------------
@@ -70,11 +75,9 @@
 					<td>PW</td>
 					<td><input type="password" name="pass" value="" size="15"></td>
 				</tr>
-				<tr>
+				<tr align="right">
 					<td colspan="2">
-						<div align="right">
-							<input type="button" value="LOGIN" onclick="loginCheck()">&nbsp;
-						</div>
+						<input type="button" value="LOGIN" onclick="loginCheck()">
 					</td>
 				</tr>
 			</table>

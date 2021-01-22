@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=EUC-KR"%>
+<%@ page contentType="text/html; charset=utf-8"%>
 <%
 	String id = (String) session.getAttribute("idKey");
 %>
@@ -9,7 +9,7 @@
 <script type="text/javascript">
 function passInputCheck() {
 	if((document.postFrm.pass.value == "") || (document.postFrm.pass.value == null)) {
-		alert("ºñ¹Ğ¹øÈ£¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä.");
+		alert("ë¹„ë°€ë²ˆí˜¸ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”.");
 		document.postFrm.pass.focus();
 		return false;
 		
@@ -34,7 +34,7 @@ function passInputCheck() {
 		<td align=center>
 		<table border="0" width="100%" align="center">
 			<tr>
-				<td width="10%">¼º ¸í</td>
+				<td width="10%">ì„± ëª…</td>
 				<td width="90%">
 				<% if(id !=null) { %>
 					<input type="text" name="name" size="51" maxlength="15" value=<%=id%> readonly></td>
@@ -43,25 +43,25 @@ function passInputCheck() {
 				<% } %>
 			</tr>
 			<tr>
-				<td width="10%">Á¦ ¸ñ</td>
+				<td width="10%">ì œ ëª©</td>
 				<td width="90%">
 				<input type="text" name="subject" size="51" maxlength="30"></td>
 			</tr>
 			<tr>
-				<td width="10%">³» ¿ë</td>
+				<td width="10%">ë‚´ ìš©</td>
 				<td width="90%"><textarea name="content" rows="10" cols="50"></textarea></td>
 			</tr>
 			<tr>
-				<td width="10%">ºñ¹Ğ ¹øÈ£</td>
+				<td width="10%">ë¹„ë°€ ë²ˆí˜¸</td>
 				<td width="90%"><input type="password" name="pass" size="51" maxlength="15"></td>
 			</tr>
 			<tr>
 			 <tr>
-     			<td width="10%">ÆÄÀÏÃ£±â</td> 
+     			<td width="10%">íŒŒì¼ì°¾ê¸°</td> 
      			<td width="90%" ><input type="file" name="filename" size="51" maxlength="50"></td>
     		</tr>
  			<tr>
- 				<td>³»¿ëÅ¸ÀÔ</td>
+ 				<td>ë‚´ìš©íƒ€ì…</td>
  				<td> HTML<input type=radio name="contentType" value="HTTP" >&nbsp;&nbsp;&nbsp;
   			 	TEXT<input type=radio name="contentType" value="TEXT" checked>
   			 	</td>
@@ -71,9 +71,9 @@ function passInputCheck() {
 			</tr>
 			<tr>
 				<td colspan="2">
-					 <input type="submit" value="µî·Ï" onClick="return passInputCheck()">
-					 <input type="reset" value="´Ù½Ã¾²±â">
-					 <input type="button" value="¸®½ºÆ®" onClick="javascript:location.href='list.jsp'">
+					 <input type="submit" value="ë“±ë¡" onClick="return passInputCheck()">
+					 <input type="reset" value="ë‹¤ì‹œì“°ê¸°">
+					 <input type="button" value="ë¦¬ìŠ¤íŠ¸" onClick="javascript:location.href='list.jsp'">
 				</td>
 			</tr>
 		</table>

@@ -21,7 +21,7 @@ public class BoardMgr {
 
 	private DBConnectionMgr pool;
 	private static final String  SAVEFOLDER = "/web/file";
-	private static final String ENCTYPE = "euc-kr";
+	private static final String ENCTYPE = "utf-8";
 	private static int MAXSIZE = 5*1024*1024;
 
 	public BoardMgr() {

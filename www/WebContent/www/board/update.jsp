@@ -1,12 +1,23 @@
-<%@ page contentType="text/html; charset=EUC-KR"%>
+<%@ page contentType="text/html; charset=utf-8"%>
 <%@ page import="www.BoardBean"%>
 <% 
+		request.setCharacterEncoding("euc-kr");
 	  int num = Integer.parseInt(request.getParameter("num"));
 	  String nowPage = request.getParameter("nowPage");
 	  BoardBean bBean = (BoardBean)session.getAttribute("bBean");
 	  String subject = bBean.getSubject();
 	  String name = bBean.getName(); 
-	  String content = bBean.getContent(); 
+	  String content = bBean.getContent();
+	  
+	  Cookie[] cookies = request.getCookies();
+	  if(cookies != null) {
+		  for(Cookie tempCookie : cookies) {
+			  if(tempCookie.getName().equals("idKey")) {
+					session.setAttribute("idKey", tempCookie.getValue());
+			  }
+		  }
+	  }
+	 String id = (String) session.getAttribute("idKey");
 %>
 <html>
 <head> 
@@ -15,7 +26,7 @@
 <script>
 	function check() {
 	   if (document.updateFrm.pass.value == "") {
-		 alert("¼öÁ¤À» À§ÇØ ÆĞ½º¿öµå¸¦ ÀÔ·ÂÇÏ¼¼¿ä.");
+		 alert("ìˆ˜ì •ì„ ìœ„í•´ íŒ¨ìŠ¤ì›Œë“œë¥¼ ì…ë ¥í•˜ì„¸ìš”.");
 		 document.updateFrm.pass.focus();
 		 return false;
 		 }
@@ -37,35 +48,35 @@
   <td align="center">
    <table border="0">
     <tr>
-     <td width="20%">¼º ¸í</td>
+     <td width="20%">ì„± ëª…</td>
      <td width="80%">
 	  <input type="text" name="name" value="<%=name%>" size="51" maxlength="20">
 	 </td>
 	</tr>
 	<tr>
-     <td width="20%">Á¦ ¸ñ</td>
+     <td width="20%">ì œ ëª©</td>
      <td width="80%">
 	  <input type="text" name="subject" size="51" value="<%=subject%>" maxlength="50">
 	 </td>
     <tr>
-     <td width="20%">³» ¿ë</td>
+     <td width="20%">ë‚´ ìš©</td>
      <td width="80%">
 	  <textarea name="content" rows="10" cols="50"><%=content%></textarea>
 	 </td>
     </tr>
 	<tr>
-     <td width="20%">ºñ¹Ğ ¹øÈ£</td> 
+     <td width="20%">ë¹„ë°€ ë²ˆí˜¸</td> 
      <td width="80%"><input type="password" name="pass" size="15" maxlength="15">
-      ¼öÁ¤½Ã¿¡´Â ºñ¹Ğ¹øÈ£°¡ ÇÊ¿äÇÕ´Ï´Ù.</td>
+      ìˆ˜ì •ì‹œì—ëŠ” ë¹„ë°€ë²ˆí˜¸ê°€ í•„ìš”í•©ë‹ˆë‹¤.</td>
     </tr>
 	<tr>
      <td colspan="2" height="5"><hr size="1"></td>
     </tr>
 	<tr>
      <td colspan="2">
-	  <input type="button" value="¼öÁ¤¿Ï·á" onClick="check()">
-      <input type="reset" value="´Ù½Ã¼öÁ¤"> 
-      <input type="button" value="µÚ·Î" onClick="history.go(-1)">
+	  <input type="button" value="ìˆ˜ì •ì™„ë£Œ" onClick="check()">
+      <input type="reset" value="ë‹¤ì‹œìˆ˜ì •"> 
+      <input type="button" value="ë’¤ë¡œ" onClick="history.go(-1)">
 	 </td>
     </tr> 
    </table>

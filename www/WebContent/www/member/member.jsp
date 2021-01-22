@@ -1,28 +1,23 @@
-<%@ page contentType="text/html;charset=EUC-KR"%>
+<%@ page contentType="text/html;charset=utf-8"%>
 <html>
 <head>
-<title>È¸¿ø°¡ÀÔ</title>
+<title>íšŒì›ê°€ìž…</title>
 <link href="style.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="script.js"></script>
 <script type="text/javascript">
 	function idCheck(id) {
 		frm = document.regFrm;
 		if (id == "") {
-			alert("¾ÆÀÌµð¸¦ ÀÔ·ÂÇØ ÁÖ¼¼¿ä.");
+			alert("ì•„ì´ë””ë¥¼ ìž…ë ¥í•´ ì£¼ì„¸ìš”.");
 			frm.id.focus();
 			return;
 		}
 		url = "idCheck.jsp?id=" + id;
 		window.open(url, "IDCheck", "width=300,height=150");
 	}
-
-	function zipCheck() {
-		url = "zipCheck.jsp?check=y";
-		window.open(url, "ZipCodeSearch","width=500,height=300,scrollbars=yes");
-	}
 </script>
 </head>
-<body bgcolor="#FFFFCC" onLoad="regFrm.id.focus()">
+<body bgcolor="white" onLoad="regFrm.id.focus()">
 	<div align="center">
 		<br /><br />
 		<form name="regFrm" method="post" action="memberProc.jsp">
@@ -31,96 +26,96 @@
 					<td align="center" valign="middle" bgcolor="#FFFFCC">
 						<table border="1" cellspacing="0" cellpadding="2" align="center" width="600">
 							<tr align="center" bgcolor="#996600">
-								<td colspan="3"><font color="#FFFFFF"><b>È¸¿ø °¡ÀÔ</b></font></td>
+								<td colspan="3"><font color="#FFFFFF"><b>íšŒì› ê°€ìž…</b></font></td>
 							</tr>
 							<tr>
-								<td width="20%">¾ÆÀÌµð</td>
+								<td width="20%">ì•„ì´ë””</td>
 								<td width="50%"><input type="text" name="id" size="15"
-									value=""> <input type="button" value="IDÁßº¹È®ÀÎ"
+									value=""> <input type="button" value="IDì¤‘ë³µí™•ì¸"
 									onClick="idCheck(this.form.id.value)"></td>
-								<td width="30%">¾ÆÀÌµð¸¦ Àû¾î ÁÖ¼¼¿ä.</td>
+								<td width="30%">ì•„ì´ë””ë¥¼ ì ì–´ ì£¼ì„¸ìš”.</td>
 							</tr>
 							<tr>
-								<td>ÆÐ½º¿öµå</td>
+								<td>íŒ¨ìŠ¤ì›Œë“œ</td>
 								<td><input type="password" name="pass" size="15" value=""></td>
-								<td>ÆÐ½º¿öµå¸¦ Àû¾îÁÖ¼¼¿ä.</td>
+								<td>íŒ¨ìŠ¤ì›Œë“œë¥¼ ì ì–´ì£¼ì„¸ìš”.</td>
 							</tr>
 							<tr>
-								<td>ÆÐ½º¿öµå È®ÀÎ</td>
+								<td>íŒ¨ìŠ¤ì›Œë“œ í™•ì¸</td>
 								<td><input type="password" name="repass" size="15" value=""></td>
-								<td>ÆÐ½º¿öµå¸¦ È®ÀÎÇÕ´Ï´Ù.</td>
+								<td>íŒ¨ìŠ¤ì›Œë“œë¥¼ í™•ì¸í•©ë‹ˆë‹¤.</td>
 							</tr>
 							<tr>
-								<td>ÀÌ¸§</td>
+								<td>ì´ë¦„</td>
 								<td><input type="text" name="name" size="15" value="">
 								</td>
-								<td>ÀÌ¸§À» Àû¾îÁÖ¼¼¿ä.</td>
+								<td>ì´ë¦„ì„ ì ì–´ì£¼ì„¸ìš”.</td>
 							</tr>
 							<tr>
-								<td>¼ºº°</td>
-								<td>³²<input type="radio" name="sex" value="1"
-									checked="checked"> ¿©<input type="radio" name="sex"
+								<td>ì„±ë³„</td>
+								<td>ë‚¨<input type="radio" name="sex" value="1"
+									checked="checked"> ì—¬<input type="radio" name="sex"
 									value="2">
 								</td>
-								<td>¼ºº°À» ¼±ÅÃ ÇÏ¼¼¿ä.</td>
+								<td>ì„±ë³„ì„ ì„ íƒ í•˜ì„¸ìš”.</td>
 							</tr>
 							<tr>
-								<td>»ý³â¿ùÀÏ</td>
+								<td>ìƒë…„ì›”ì¼</td>
 								<td><input type="text" name="birthday" size="6" value="">
 									ex)830815</td>
-								<td>»ý³â¿ùÀÏ¸¦ Àû¾î ÁÖ¼¼¿ä.</td>
+								<td>ìƒë…„ì›”ì¼ë¥¼ ì ì–´ ì£¼ì„¸ìš”.</td>
 							</tr>
 							<tr>
 								<td>Email</td>
 								<td><input type="text" name="email" size="30" value="">
 								</td>
-								<td>ÀÌ¸ÞÀÏ¸¦ Àû¾î ÁÖ¼¼¿ä.</td>
+								<td>ì´ë©”ì¼ë¥¼ ì ì–´ ì£¼ì„¸ìš”.</td>
 							</tr>
 							<tr>
-								<td>¿ìÆí¹øÈ£</td>
+								<td>ìš°íŽ¸ë²ˆí˜¸</td>
 								<td><input type="text" name="zipcode" size="7" >
-									<input type="button" value="¿ìÆí¹øÈ£Ã£±â" onClick="zipCheck()">
+									<input type="button" value="ìš°íŽ¸ë²ˆí˜¸ì°¾ê¸°" onClick="zipCheck()">
 								</td>
-								<td>¿ìÆí¹øÈ£¸¦ °Ë»öÇÏ¼¼¿ä.</td>
+								<td>ìš°íŽ¸ë²ˆí˜¸ë¥¼ ê²€ìƒ‰í•˜ì„¸ìš”.</td>
 							</tr>
 							<tr>
-								<td>ÁÖ¼Ò</td>
+								<td>ì£¼ì†Œ</td>
 								<td><input type="text" name="address" size="45"></td>
-								<td>ÁÖ¼Ò¸¦ Àû¾î ÁÖ¼¼¿ä.</td>
+								<td>ì£¼ì†Œë¥¼ ì ì–´ ì£¼ì„¸ìš”.</td>
 							</tr>
 							<tr>
-								<td>Ãë¹Ì</td>
-								<td>ÀÎÅÍ³Ý<input type="checkbox" name="hobby" value="ÀÎÅÍ³Ý">
-									¿©Çà<input type="checkbox" name="hobby" value="¿©Çà"> °ÔÀÓ<input
-									type="checkbox" name="hobby" value="°ÔÀÓ"> ¿µÈ­<input
-									type="checkbox" name="hobby" value="¿µÈ­"> ¿îµ¿<input
-									type="checkbox" name="hobby" value="¿îµ¿">
+								<td>ì·¨ë¯¸</td>
+								<td>ì¸í„°ë„·<input type="checkbox" name="hobby" value="ì¸í„°ë„·">
+									ì—¬í–‰<input type="checkbox" name="hobby" value="ì—¬í–‰"> ê²Œìž„<input
+									type="checkbox" name="hobby" value="ê²Œìž„"> ì˜í™”<input
+									type="checkbox" name="hobby" value="ì˜í™”"> ìš´ë™<input
+									type="checkbox" name="hobby" value="ìš´ë™">
 								</td>
-								<td>Ãë¹Ì¸¦ ¼±ÅÃ ÇÏ¼¼¿ä.</td>
+								<td>ì·¨ë¯¸ë¥¼ ì„ íƒ í•˜ì„¸ìš”.</td>
 							</tr>
 							<tr>
-								<td>Á÷¾÷</td>
+								<td>ì§ì—…</td>
 								<td><select name=job>
-										<option value="0" selected>¼±ÅÃÇÏ¼¼¿ä.
-										<option value="È¸»ç¿ø">È¸»ç¿ø
-										<option value="¿¬±¸Àü¹®Á÷">¿¬±¸Àü¹®Á÷
-										<option value="±³¼öÇÐ»ý">±³¼öÇÐ»ý
-										<option value="ÀÏ¹ÝÀÚ¿µ¾÷">ÀÏ¹ÝÀÚ¿µ¾÷
-										<option value="°ø¹«¿ø">°ø¹«¿ø
-										<option value="ÀÇ·áÀÎ">ÀÇ·áÀÎ
-										<option value="¹ýÁ¶ÀÎ">¹ýÁ¶ÀÎ
-										<option value="Á¾±³,¾ð·Ð,¿¡¼úÀÎ">Á¾±³.¾ð·Ð/¿¹¼úÀÎ
-										<option value="³ó,Ãà,¼ö»ê,±¤¾÷ÀÎ">³ó/Ãà/¼ö»ê/±¤¾÷ÀÎ
-										<option value="ÁÖºÎ">ÁÖºÎ
-										<option value="¹«Á÷">¹«Á÷
-										<option value="±âÅ¸">±âÅ¸
+										<option value="0" selected>ì„ íƒí•˜ì„¸ìš”.
+										<option value="íšŒì‚¬ì›">íšŒì‚¬ì›
+										<option value="ì—°êµ¬ì „ë¬¸ì§">ì—°êµ¬ì „ë¬¸ì§
+										<option value="êµìˆ˜í•™ìƒ">êµìˆ˜í•™ìƒ
+										<option value="ì¼ë°˜ìžì˜ì—…">ì¼ë°˜ìžì˜ì—…
+										<option value="ê³µë¬´ì›">ê³µë¬´ì›
+										<option value="ì˜ë£Œì¸">ì˜ë£Œì¸
+										<option value="ë²•ì¡°ì¸">ë²•ì¡°ì¸
+										<option value="ì¢…êµ,ì–¸ë¡ ,ì—ìˆ ì¸">ì¢…êµ.ì–¸ë¡ /ì˜ˆìˆ ì¸
+										<option value="ë†,ì¶•,ìˆ˜ì‚°,ê´‘ì—…ì¸">ë†/ì¶•/ìˆ˜ì‚°/ê´‘ì—…ì¸
+										<option value="ì£¼ë¶€">ì£¼ë¶€
+										<option value="ë¬´ì§">ë¬´ì§
+										<option value="ê¸°íƒ€">ê¸°íƒ€
 								</select></td>
-								<td>Á÷¾÷À» ¼±ÅÃ ÇÏ¼¼¿ä.</td>
+								<td>ì§ì—…ì„ ì„ íƒ í•˜ì„¸ìš”.</td>
 							</tr>
 							<tr>
 								<td colspan="3" align="center">
-									<input type="submit"value="È¸¿ø°¡ÀÔ"> &nbsp; &nbsp; 
-									<input type="reset" value="´Ù½Ã¾²±â"></td>
+									<input type="submit"value="íšŒì›ê°€ìž…"> &nbsp; &nbsp; 
+									<input type="reset" value="ë‹¤ì‹œì“°ê¸°"></td>
 							</tr>
 						</table>
 					</td>

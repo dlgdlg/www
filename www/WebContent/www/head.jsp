@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=euc-kr"%>
+<%@ page contentType="text/html; charset=utf-8"%>
 <%
 	  String cPath = request.getContextPath();
 %>
@@ -18,8 +18,9 @@
 		text-weight: bold;
 	}
 	body p {
-		color: #ABABAB;
-		font-size: 10px;
+		color: #7F7F7F;
+		font-size: 15px;
+		text-weight: bold;
 	}
 	a {
 		text-decoration: none;
@@ -28,6 +29,6 @@
 </head>
 <body>
 	<a href="<%=cPath%>/www/index.jsp" target="_parent" onFocus="this.blur();"><b>COMPANY</b></a>
-	<p>BONOBONO</p>
+	<p>KITRI</p>
 </body>
 </html>

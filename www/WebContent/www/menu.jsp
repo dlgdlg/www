@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=euc-kr"%>
+<%@ page contentType="text/html; charset=utf-8"%>
 <%
 	String cPath = request.getContextPath();
 %>
@@ -26,9 +26,9 @@
 </style>
 </head>
 <body>
-	<a href="<%=cPath%>/www/menu/intro.jsp" target="content">х╦╩Г╪р╟Ё</a>
-	<a href="<%=cPath%>/www/menu/info.jsp" target="content">ц╓©Ка╓╨╦</a>
-	<a href="<%=cPath%>/www/board/list.jsp" target="content">╟М╟╢╪╬ем</a>
-	<a href="http://wiki.company.com" target="content">ю╖е╟</a>
+	<a href="<%=cPath%>/www/menu/intro.jsp" target="content">М ▄Л┌╛Л├▄Й╟°</a>
+	<a href="<%=cPath%>/www/menu/info.jsp" target="content">Л╠└Л ╘Л═∙КЁ╢</a>
+	<a href="<%=cPath%>/www/board/list.jsp" target="content">ЙЁ═Й╟²Л└╪М└╟</a>
+	<a href="http://wiki.company.com" target="content">Л°└М┌╓</a>
 </body>
 </html>

@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=EUC-KR"%>
+<%@ page contentType="text/html; charset=utf-8"%>
 <html>
 <head>
 <%@page import="www.BoardBean"%>
@@ -10,7 +10,7 @@
 	  String nowPage = request.getParameter("nowPage");
 	  int num = Integer.parseInt(request.getParameter("num"));
 	  if(request.getParameter("pass")!=null){
-			//ºñ¹øÀ» ÀÔ·ÂÀ» ÇØ¼­ ¼¼¼Ç¿¡ ÀÖ´Â pass ºñ±³¿äÃ»
+			//ë¹„ë²ˆì„ ì…ë ¥ì„ í•´ì„œ ì„¸ì…˜ì— ìˆëŠ” pass ë¹„êµìš”ì²­
 	    String inPass = request.getParameter("pass");
 		BoardBean bBean = (BoardBean)session.getAttribute("bBean");
 		String dbPass = bBean.getPass();
@@ -21,7 +21,7 @@
 		}else{
 %>
 		<script type="text/javascript">
-			alert("ÀÔ·ÂÇÏ½Å ºñ¹Ğ¹øÈ£°¡ ¾Æ´Õ´Ï´Ù.");
+			alert("ì…ë ¥í•˜ì‹  ë¹„ë°€ë²ˆí˜¸ê°€ ì•„ë‹™ë‹ˆë‹¤.");
 			history.back();
 		</script>
 <%}
@@ -32,7 +32,7 @@
 <script type="text/javascript">
 	function check() {
 	  if (document.delFrm.pass.value == "") {
-	  alert("ÆĞ½º¿öµå¸¦ ÀÔ·ÂÇÏ¼¼¿ä.");
+	  alert("íŒ¨ìŠ¤ì›Œë“œë¥¼ ì…ë ¥í•˜ì„¸ìš”.");
 	  document.delFrm.pass.focus();
 	  return false;
 	  }
@@ -46,7 +46,7 @@
 <table width="50%" cellspacing="0" cellpadding="3">
  <tr>
   <td bgcolor=#dddddd height="21" align="center">
-      »ç¿ëÀÚÀÇ ºñ¹Ğ¹øÈ£¸¦ ÀÔ·ÂÇØ ÁÖ¼¼¿ä.</td>
+      ì‚¬ìš©ìì˜ ë¹„ë°€ë²ˆí˜¸ë¥¼ ì…ë ¥í•´ ì£¼ì„¸ìš”.</td>
  </tr>
 </table>
 <form name="delFrm" method="post" action="delete.jsp" >
@@ -64,9 +64,9 @@
     </tr>
     <tr>
      <td align="center">
-   		<input type="button" value="»èÁ¦¿Ï·á" onClick="check()"> 
-      	<input type="reset" value="´Ù½Ã¾²±â"> 
-      	<input type="button" value="µÚ·Î" onClick="history.go(-1)">
+   		<input type="button" value="ì‚­ì œì™„ë£Œ" onClick="check()"> 
+      	<input type="reset" value="ë‹¤ì‹œì“°ê¸°"> 
+      	<input type="button" value="ë’¤ë¡œ" onClick="history.go(-1)">
   	  </td>
     </tr> 
    </table>

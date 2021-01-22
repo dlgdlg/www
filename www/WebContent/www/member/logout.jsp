@@ -1,6 +1,6 @@
-<%@ page contentType="text/html; charset=EUC-KR"%>
+<%@ page contentType="text/html; charset=utf-8"%>
 <%
-	session.invalidate(); //¼¼¼Ç ÇØÁ¦
+	session.invalidate(); //ì„¸ì…˜ í•´ì œ
 	
 	Cookie[] cookies = request.getCookies();
 	if(cookies!=null) {
@@ -16,7 +16,7 @@
       	
 %>
 <script>
-   alert('·Î±×¾Æ¿ô µÇ¾ú½À´Ï´Ù.');
+   alert('ë¡œê·¸ì•„ì›ƒ ë˜ì—ˆìŠµë‹ˆë‹¤.');
    top.document.location.reload(); 
-   location.href="<%=request.getContextPath()%>/www/right.jsp"; <!-- Ã³À½ Ã¢ ´Ù½Ã ³ªÅ¸³² -->
+   location.href="<%=request.getContextPath()%>/www/right.jsp"; <!-- ì²˜ìŒ ì°½ ë‹¤ì‹œ ë‚˜íƒ€ë‚¨ -->
 </script>

@@ -39,7 +39,7 @@ import java.util.Vector;
 public class DBConnectionMgr {
     private Vector connections = new Vector(10);
     private String _driver = "org.mariadb.jdbc.Driver",
-    _url = "jdbc:mariadb://1.1.1.41:3306/web?useUnicode=true&characterEncoding=EUC_KR",
+    _url = "jdbc:mariadb://1.1.1.41:3306/web?useUnicode=true&characterEncoding=utf8",
     _user = "web",
     _password = "web";
     

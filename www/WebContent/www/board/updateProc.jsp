@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=EUC-KR"%>
+<%@ page contentType="text/html; charset=utf-8"%>
 <%request.setCharacterEncoding("EUC-KR");%>
 <jsp:useBean id="bMgr" class="www.BoardMgr" />
 <jsp:useBean id="bBean" class="www.BoardBean" scope="session"/>
@@ -6,7 +6,7 @@
 <jsp:setProperty property="*" name="upBean"/>
 <%
 	  String nowPage = request.getParameter("nowPage");
-	  //bean¿¡ ÀÖ´Â pass¿Í upBean pass¸¦ ºñ±³(read.jsp)
+	  //beanì— ìžˆëŠ” passì™€ upBean passë¥¼ ë¹„êµ(read.jsp)
 	  String upPass = upBean.getPass();
 	  String inPass = bBean.getPass();
 	  if(upPass.equals(inPass)){
@@ -16,7 +16,7 @@
 	  }else{
 %>
 	<script type="text/javascript">
-		alert("ÀÔ·ÂÇÏ½Å ºñ¹Ð¹øÈ£°¡ ¾Æ´Õ´Ï´Ù.");
+		alert("ìž…ë ¥í•˜ì‹  ë¹„ë°€ë²ˆí˜¸ê°€ ì•„ë‹™ë‹ˆë‹¤.");
 		history.back();
 	</script>
 <%}%>

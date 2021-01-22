@@ -13,7 +13,5 @@ CREATE TABLE `tblBoard` (
 	`filename`         varchar(30)                    ,
 	`filesize`           int(11)                        ,
 	PRIMARY KEY ( `num` )
-);
+) default character set utf8 collate utf8_general_ci;
 
-insert tblBoard(name,content,subject,ref,pos,depth,regdate,pass,count,ip,filename,filesize)
-values('aaa', 'bbb', 'ccc', 0, 0, 0, now(), '1111',0, '127.0.0.1', null, 0)
