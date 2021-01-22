@@ -4,7 +4,7 @@
 	  String nowPage = request.getParameter("nowPage");
 	  String subject = bBean.getSubject();
 	  String content = bBean.getContent(); 
-		request.setCharacterEncoding("euc-kr");
+		request.setCharacterEncoding("utf-8");
 	  
 	  Cookie[] cookies = request.getCookies();
 	  if(cookies != null) {
