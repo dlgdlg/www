@@ -1,12 +1,17 @@
 package www;
 
+import java.io.UnsupportedEncodingException;
+import java.util.*;
+import javax.naming.directory.*;
+
+import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
+
+import javax.naming.*;
+import java.lang.Object;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.*;
-import jcifs.util.Base64;
 
-import javax.naming.directory.*;
-import javax.naming.*;
+import jcifs.util.*;
 
 public class MemberMgr1 {
 	private static String ldapURL = "ldap://ldap.company.com:389";
@@ -98,7 +103,7 @@ public class MemberMgr1 {
 			attrs.put("mail", mail);
 			attrs.put("homeDirectory", homeDirectory);
 			attrs.put("loginShell", loginShell);
-			attrs.put("userPassword", userPassword);
+			attrs.put("userPassword", hashMD5Password(userPassword));
 			
 			InitialDirContext iniDirContext = (InitialDirContext) ctx;
 			ctx.bind("cn=" + uid + "," + searchDN, iniDirContext, attrs);
@@ -165,11 +170,10 @@ public class MemberMgr1 {
 		return flag;
 	}
 	
-	public String hashMD5Password(String password) throws Exception {
+	public String hashMD5Password(String password) throws UnsupportedEncodingException, NoSuchAlgorithmException{
 		MessageDigest digest = MessageDigest.getInstance("MD5");
-		digest.update(password.getBytes("UTF-8"));
+		digest.update(password.getBytes("UTF8"));
 		String md5Password = Base64.encode(digest.digest());
-		
 		return "{MD5}" + md5Password;
 		
 	}

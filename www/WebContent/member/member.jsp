@@ -32,7 +32,7 @@
 			alert("확인용 비밀번호를 입력해 주세요.")
 			return false;
 		}
-		if(document.regFrm.pass.value != document.regFrm.pass.repass.value) {
+		if(document.regFrm.pass.value != document.regFrm.repass.value) {
 			alert("비밀번호가 일치하지 않습니다. 다시 입력해 주세요.");
 			document.regFrm.pass.value = "";
 			document.regFrm.repass.value = "";
