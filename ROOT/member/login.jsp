@@ -81,10 +81,8 @@
 					<td><input type="password" name="pass" value="" size="15"></td>
 				</tr>
 				<tr align="right">
-					<td>
+					<td colspan="2">
 						<input type="button" value="LOGIN" onclick="loginCheck()">
-					</td>
-					<td>
 						<input type="button" value="SIGN" onclick="memberForm()">
 					</td>
 				</tr>
