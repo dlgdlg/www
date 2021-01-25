@@ -4,14 +4,9 @@ public class MemberBean {
 
 	private String id;
 	private String pass;
-	private String name;
-	private String sex;
-	private String birthday;
+	private String group;
+	private String gidNumber;
 	private String email;
-	private String zipcode;
-	private String address;
-	private String hobby[];
-	private String job;
 
 	public String getId() {
 		return id;
@@ -28,29 +23,24 @@ public class MemberBean {
 	public void setPass(String pass) {
 		this.pass = pass;
 	}
-
-	public String getName() {
-		return name;
+	
+	public String getGroup() {
+		return group;
 	}
-
-	public void setName(String name) {
-		this.name = name;
+	
+	public void setGroup(String group) {
+		this.group = group;
+		setGidNumber(group);
 	}
-
-	public String getSex() {
-		return sex;
+	
+	public String getGidNumber() {
+		return gidNumber;
 	}
-
-	public void setSex(String sex) {
-		this.sex = sex;
-	}
-
-	public String getBirthday() {
-		return birthday;
-	}
-
-	public void setBirthday(String birthday) {
-		this.birthday = birthday;
+	
+	public void setGidNumber(String group) {
+		if(group == "users") {
+			this.gidNumber = "501";
+		}
 	}
 
 	public String getEmail() {
@@ -59,38 +49,5 @@ public class MemberBean {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public String getZipcode() {
-		return zipcode;
-	}
-
-	public void setZipcode(String zipcode) {
-		this.zipcode = zipcode;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public String[] getHobby() {
-		return hobby;
-	}
-
-	public void setHobby(String[] hobby) {
-		this.hobby = hobby;
-	}
-
-	public String getJob() {
-		return job;
-	}
-
-	public void setJob(String job) {
-		this.job = job;
-	}
-	
+	}	
 }

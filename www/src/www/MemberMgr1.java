@@ -1,9 +1,12 @@
 package www;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.*;
+import jcifs.util.Base64;
+
 import javax.naming.directory.*;
 import javax.naming.*;
-import javax.naming.ldap.*;
 
 public class MemberMgr1 {
 	private static String ldapURL = "ldap://ldap.company.com:389";
@@ -16,7 +19,6 @@ public class MemberMgr1 {
 		boolean isAuthenticated = false;
 		
 		String searchDN = searchFilter + baseDN;
-		System.out.println(searchDN);
 		
 		DirContext ctx = null;
 		
@@ -44,5 +46,131 @@ public class MemberMgr1 {
 			}
 		}
 		return isAuthenticated;
+	}
+	
+	public boolean insertMember(MemberBean bean) throws Exception {
+		boolean flag = false;
+		
+		Random rand = new Random();
+		
+		String searchDN = searchFilter + baseDN;
+		
+		String uid = bean.getId();
+		String uidNumber = rand.nextInt(3000)+"";
+		String group = bean.getGroup();
+		String mail = uid+"@company.com";
+		String homeDirectory = "/home/users/"+uid;
+		String loginShell = "/bin/bash";
+		String userPassword = bean.getPass();
+		
+		
+		DirContext ctx = null;
+		
+		Hashtable env = new Hashtable();
+		env.put(Context.INITIAL_CONTEXT_FACTORY, "com.sun.jndi.ldap.LdapCtxFactory");
+		
+		env.put(Context.PROVIDER_URL, ldapURL);
+		
+		env.put(Context.SECURITY_AUTHENTICATION, "simple");
+		env.put(Context.SECURITY_PRINCIPAL, "cn=admin,"+baseDN);
+		env.put(Context.SECURITY_CREDENTIALS, "12345678");
+		
+		try {
+			ctx = new InitialDirContext(env);
+			
+			Attribute objectClass = new BasicAttribute("objectClass");
+			
+			objectClass.add("inetOrgPerson");
+			objectClass.add("posixAccount");
+			objectClass.add("top");
+			
+			BasicAttributes attrs = new BasicAttributes(true);
+			
+			attrs.put(objectClass);
+			
+			attrs.put("cn", uid);
+			attrs.put("sn", uid);
+			attrs.put("uid", uid);
+			attrs.put("uidNumber",uidNumber);
+			if(group.equals("users")) {
+				attrs.put("gidNumber","501");
+			}
+			attrs.put("mail", mail);
+			attrs.put("homeDirectory", homeDirectory);
+			attrs.put("loginShell", loginShell);
+			attrs.put("userPassword", userPassword);
+			
+			InitialDirContext iniDirContext = (InitialDirContext) ctx;
+			ctx.bind("cn=" + uid + "," + searchDN, iniDirContext, attrs);
+			flag = true;
+			System.out.println("회원가입 성공");
+			ctx.close();			
+		} catch(AuthenticationException authEx) {
+			System.out.println(authEx.getMessage());
+		} catch(NamingException nameEx) {
+			System.out.println(nameEx.getMessage());
+		}
+		
+		return flag;
+	}
+	
+	
+	public boolean checkId(String inputId) {
+		boolean flag = true;
+		
+		String searchDN = searchFilter + baseDN; // ou=users,dc=company,dc=com
+		
+		DirContext ctx = null;
+		
+		Hashtable env = new Hashtable();
+		env.put(Context.INITIAL_CONTEXT_FACTORY, "com.sun.jndi.ldap.LdapCtxFactory");
+		
+		env.put(Context.PROVIDER_URL, ldapURL);
+		
+		env.put(Context.SECURITY_AUTHENTICATION, "simple");
+		env.put(Context.SECURITY_PRINCIPAL, "cn=web_admin,"+searchDN);
+		env.put(Context.SECURITY_CREDENTIALS, "12345678");
+		
+		try {
+			ctx =new InitialDirContext(env);
+			
+			SearchControls cons = new SearchControls();
+			cons.setSearchScope(SearchControls.SUBTREE_SCOPE);
+			
+			String filter="(&(objectClass=inetOrgPerson)(cn=*))";
+			
+			NamingEnumeration result = ctx.search(baseDN, filter, cons);
+			
+			while(result.hasMore()) {
+				SearchResult nextEntry = null;
+				nextEntry = (SearchResult)result.next();
+				
+				Attributes attrs = nextEntry.getAttributes();
+				if(attrs != null) {
+					Attribute cn = attrs.get("cn");
+					System.out.println(cn.toString());
+
+					if(cn.toString().substring(5).equals(inputId) || cn.toString().substring(4).equals(inputId)) {
+						flag = true;
+						return flag;// 한번이라도 inputId와 동일한 cn이 존재할 시 false 반환
+					} else {
+						flag = false;
+					}
+				}
+			}
+		} catch(Exception e) {
+			System.out.println(e);
+		} 
+		
+		return flag;
+	}
+	
+	public String hashMD5Password(String password) throws Exception {
+		MessageDigest digest = MessageDigest.getInstance("MD5");
+		digest.update(password.getBytes("UTF-8"));
+		String md5Password = Base64.encode(digest.digest());
+		
+		return "{MD5}" + md5Password;
+		
 	}
 }
