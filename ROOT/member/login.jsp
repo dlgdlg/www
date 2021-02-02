@@ -61,9 +61,9 @@
 				<tr>
 					<td><a href="#" onClick="window.open('http://mail.company.com/','_blank','width=800,height=800')">MAIL</a></td>
 					<td> / </td>
-					<td><a href="#" onClick="window.open('http://cloud.company.com/','_blank','width=800,height=800')">CLOUD</a></td>
+					<td><a href="#" onClick="window.open('http://cloud.se.company.com/','_blank','width=800,height=800')">CLOUD</a></td>
 					<td> / <td>
-					<td><a href="#" onClick="window.open('http://ncloud.company.com/','_blank','width=800,height=800')">NCLOUD</a></td>
+					<td><a href="#" onClick="window.open('http://ncloud.se.company.com/','_blank','width=800,height=800')">NCLOUD</a></td>
 				</tr>
 			</table>
 			<%} else {%>
