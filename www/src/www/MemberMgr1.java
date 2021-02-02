@@ -11,8 +11,6 @@ import java.lang.Object;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-import jcifs.util.*;
-
 public class MemberMgr1 {
 	private static String ldapURL = "ldap://ldap.company.com:389";
 	private static String baseDN = "dc=company,dc=com";
