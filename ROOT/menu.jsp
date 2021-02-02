@@ -29,6 +29,6 @@
 	<a href="<%=cPath%>/menu/intro.jsp" target="content">회사소개</a>
 	<a href="<%=cPath%>/menu/info.jsp" target="content">채용정보</a>
 	<a href="<%=cPath%>/board/list.jsp" target="content">고객센터</a>
-	<a href="http://wiki.company.com" target="content">위키</a>
+	<a href="http://wiki.se.company.com" target="content">위키</a>
 </body>
 </html>
